@@ -26,7 +26,7 @@ c
       integer ipart        ! loop over collision partners
       character*10 partner ! name of collision partner
       integer id           ! ID code of collision partner
-
+      CHARACTER(len=255) :: homedir
 c     Set input parameters to default values
       call defaults
 
@@ -41,10 +41,14 @@ c     must read file names in format(A): in free format, slashes are treated as 
  24   format(1pe10.3,2x,1pe10.3)
  25   format(i2)
 
+      CALL get_environment_variable("PWD", homedir)
+
       write(*,21) 'Molecular data file ? '
       read(*,20) molfile
+      moldat = trim(molfile)
       if ((molfile(1:1).ne.'/').and.(molfile(1:1).ne.'.'))
-     $     molfile = radat(1:length(radat))//molfile(1:length(molfile))
+     $     molfile = homedir(1:length(homedir))//'/data/'
+     $     //molfile(1:length(molfile))
       write(13,20) molfile(1:length(molfile))
 
       write(*,21) 'Name of output file ? '
@@ -239,7 +243,7 @@ c     Start with summary of input parameters
       if (method.eq.3) 
      $write(8,32) '* Geometry             : Plane parallel slab'
 c      write(8,32) '* Molecular data file  : '//specref(1:80)
-      write(8,32) '* Molecular data file  : '//molfile(1:80)
+      write(8,32) '* Molecular data file  : '//moldat(1:80)
       write(8,30) '* T(kin)            [K]: ',tkin
 c      write(8,31) '* Total density  [cm-3]: ',totdens
       if(density(1).gt.eps)

@@ -19,13 +19,13 @@ c
 c     Customization section: user provides location of molecular data
 C     files ("radat") and escape probability formula ("method")
 
-      character*120 outfile,molfile,radat,specref,logfile
+      character*120 outfile,molfile,radat,specref,logfile, moldat
       character*20 version
-      parameter(radat   = '/Users/floris/Radex/moldat/')
+      parameter(radat   = '../data/')
       parameter(version = '30nov2011')
 
 c     names of output file & data file & molecule
-      common/impex/outfile,molfile,specref
+      common/impex/outfile,molfile,specref,moldat
 
       parameter(logfile = './radex.log')
 
