@@ -1,50 +1,41 @@
 # Makefile for Radex
-
-# This file is part of the RADEX software package
-# to calculate molecular excitation and radiative
-# transfer in a homogeneous medium.
-#
-# Documentation for the program is posted at
-# https://sron.rug.nl/~vdtak/radex/index.shtml  
-#
-# Although this program has been thoroughly tested, the
-# authors do not claim that it is free of errors and
-# gives correct results in all situations.
-#
-# Publications using this program should make a reference
-# to our paper: A&A 468, 627 (2007).
-
 # Uncomment the FC/FFLAGS combination of your choice
 # Option 1:
 #FC      = g77
 #FFLAGS += -fno-automatic -Wall -O2
 # Option 2:
-FC = gfortran
-FFLAGS += -O2
+#FC     = ifort
+#f2pyFC = intelem #this must match FC (ifort=intelem, gfortran=gnu95)
+#FFLAGS += -g -fPIC -fmax-errors=3 -fcheck=all -fbacktrace
+#FFLAGS += -g -fPIC
+
 # Option 3:
-#FC      = ifort
+FC      = gfortran
 #FFLAGS += -O2
+FFLAGS += -g -fPIC
 # Option 4:
 #FC = g95
 #FFLAGS += -Wall -O2
 # there may be other options of course ...
 
-OBJECTS = main.o io.o readdata.o matrix.o background.o slatec.o
-EXEC    = radex
+SRCS = types slatec commondata solver io background main
+OBJS = $(SRCS:=.o)
+EXEC    = nradex
 BINDIR  = ../bin/
 
 all: $(EXEC) install clean
 
-$(EXEC): $(OBJECTS) radex.inc Makefile
-	$(LINK.F) $(OBJECTS) -o $@
-	strip $@
+$(EXEC): $(OBJS)
+	$(FC) $(FFLAGS) -o $(EXEC) $(OBJS)
 
-%.o: %.f radex.inc Makefile
-	$(COMPILE.F) $*.f -o $@
+.SUFFIXES: .o .f90
+
+.f90.o:
+	$(FC) -c $(FCFLAGS) $<
 
 install: $(EXEC)
 	install -m 755 -p -s $(EXEC) $(BINDIR)
 
 clean:
-	- rm *.o
+	- rm *.o *.mod
 	- rm $(EXEC)
