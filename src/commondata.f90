@@ -7,7 +7,7 @@ IMPLICIT NONE
     character(200)          :: outfile, molfile, specref, moldat
     character(*), PARAMETER :: radat   = '../data/'
     character(*), PARAMETER :: version = 'version 2024'
-    character(*), PARAMETER :: logfile = './nradex.log'
+    character(*), PARAMETER :: logfile = './radex.log'
 
     !Escape probability method (uncomment your choice)
     INTEGER  :: method=1 !1=uniform sphere,2=LVG, 3=slab

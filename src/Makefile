@@ -20,7 +20,7 @@ FFLAGS += -g -fPIC
 
 SRCS = types slatec commondata solver io background main
 OBJS = $(SRCS:=.o)
-EXEC    = nradex
+EXEC    = radex
 BINDIR  = ../bin/
 
 all: $(EXEC) install clean
