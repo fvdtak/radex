@@ -1,0 +1,55 @@
+hco+.dat
+test_hco_var1.out
+50 1500
+140
+1
+H2
+1e6
+2.73
+1e16
+1.0
+1
+3
+1.e-6
+0.25
+1
+hco+.dat
+test_hco_var1.out
+50 1500
+140
+1
+H2
+1e6
+2.73
+1e16
+1.0
+1
+2
+1.e-6
+0.25
+1
+hco+.dat
+test_hco_var1.out
+50 1500
+140
+1
+H2
+1e6
+2.73
+1e16
+1.0
+1
+1
+1.e-6
+0.25
+0
+#molecule data
+#output
+#Freq : fmin - fmx
+#Tkin : 0.1 - 1e5
+#Number of collision partners ? : 1 - 7
+#Type of partner : H2
+#Density(H2)     : 1e-3 - 1e13
+#Tbg             :  0.1 - 1e5
+#Column density  :  1e5 - 1e25
+#Line width      :  1e-3 - 1e-3
